@@ -1,0 +1,16 @@
+C:\Users\MIT\source\repos\Injector\bin\Debug\net8.0-windows\Injector.exe
+C:\Users\MIT\source\repos\Injector\bin\Debug\net8.0-windows\Injector.deps.json
+C:\Users\MIT\source\repos\Injector\bin\Debug\net8.0-windows\Injector.runtimeconfig.json
+C:\Users\MIT\source\repos\Injector\bin\Debug\net8.0-windows\Injector.dll
+C:\Users\MIT\source\repos\Injector\bin\Debug\net8.0-windows\Injector.pdb
+C:\Users\MIT\source\repos\Injector\obj\Debug\net8.0-windows\Injector.Form1.resources
+C:\Users\MIT\source\repos\Injector\obj\Debug\net8.0-windows\Injector.csproj.GenerateResource.cache
+C:\Users\MIT\source\repos\Injector\obj\Debug\net8.0-windows\Injector.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\MIT\source\repos\Injector\obj\Debug\net8.0-windows\Injector.AssemblyInfoInputs.cache
+C:\Users\MIT\source\repos\Injector\obj\Debug\net8.0-windows\Injector.AssemblyInfo.cs
+C:\Users\MIT\source\repos\Injector\obj\Debug\net8.0-windows\Injector.csproj.CoreCompileInputs.cache
+C:\Users\MIT\source\repos\Injector\obj\Debug\net8.0-windows\Injector.dll
+C:\Users\MIT\source\repos\Injector\obj\Debug\net8.0-windows\refint\Injector.dll
+C:\Users\MIT\source\repos\Injector\obj\Debug\net8.0-windows\Injector.pdb
+C:\Users\MIT\source\repos\Injector\obj\Debug\net8.0-windows\Injector.genruntimeconfig.cache
+C:\Users\MIT\source\repos\Injector\obj\Debug\net8.0-windows\ref\Injector.dll
