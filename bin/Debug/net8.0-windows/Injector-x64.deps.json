@@ -6,15 +6,15 @@
   "compilationOptions": {},
   "targets": {
     ".NETCoreApp,Version=v8.0": {
-      "Injector/1.0.0": {
+      "Injector-x64/1.0.0": {
         "runtime": {
-          "Injector.dll": {}
+          "Injector-x64.dll": {}
         }
       }
     }
   },
   "libraries": {
-    "Injector/1.0.0": {
+    "Injector-x64/1.0.0": {
       "type": "project",
       "serviceable": false,
       "sha512": ""

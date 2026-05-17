@@ -6,9 +6,6 @@ namespace Injector
         private TableLayoutPanel rootLayout;
         private GroupBox pathsGroup;
         private TableLayoutPanel pathsLayout;
-        private Label injectorLabel;
-        private TextBox injectorPathTextBox;
-        private Button browseInjectorButton;
         private Label dllLabel;
         private TextBox dllPathTextBox;
         private Button browseDllButton;
@@ -19,6 +16,7 @@ namespace Injector
         private ListView processesListView;
         private ColumnHeader processNameColumn;
         private ColumnHeader pidColumn;
+        private ColumnHeader processArchitectureColumn;
         private ColumnHeader processPathColumn;
         private Label selectedProcessLabel;
         private GroupBox optionsGroup;
@@ -52,13 +50,9 @@ namespace Injector
 
         private void InitializeComponent()
         {
-            components = new System.ComponentModel.Container();
             rootLayout = new TableLayoutPanel();
             pathsGroup = new GroupBox();
             pathsLayout = new TableLayoutPanel();
-            injectorLabel = new Label();
-            injectorPathTextBox = new TextBox();
-            browseInjectorButton = new Button();
             dllLabel = new Label();
             dllPathTextBox = new TextBox();
             browseDllButton = new Button();
@@ -69,6 +63,7 @@ namespace Injector
             processesListView = new ListView();
             processNameColumn = new ColumnHeader();
             pidColumn = new ColumnHeader();
+            processArchitectureColumn = new ColumnHeader();
             processPathColumn = new ColumnHeader();
             selectedProcessLabel = new Label();
             optionsGroup = new GroupBox();
@@ -83,13 +78,13 @@ namespace Injector
             handleNumericUpDown = new NumericUpDown();
             generateLogCheckBox = new CheckBox();
             waitSymbolsCheckBox = new CheckBox();
+            logTextBox = new TextBox();
             flagsCheckedListBox = new CheckedListBox();
             mmDefaultButton = new Button();
             clearFlagsButton = new Button();
             downloadProgressBar = new ProgressBar();
             prepareButton = new Button();
             injectButton = new Button();
-            logTextBox = new TextBox();
             rootLayout.SuspendLayout();
             pathsGroup.SuspendLayout();
             pathsLayout.SuspendLayout();
@@ -112,23 +107,24 @@ namespace Injector
             rootLayout.Controls.Add(logTextBox, 1, 1);
             rootLayout.Dock = DockStyle.Fill;
             rootLayout.Location = new Point(0, 0);
+            rootLayout.Margin = new Padding(2, 3, 2, 3);
             rootLayout.Name = "rootLayout";
-            rootLayout.Padding = new Padding(12);
+            rootLayout.Padding = new Padding(9, 10, 9, 10);
             rootLayout.RowCount = 2;
-            rootLayout.RowStyles.Add(new RowStyle(SizeType.Absolute, 142F));
+            rootLayout.RowStyles.Add(new RowStyle(SizeType.Absolute, 121F));
             rootLayout.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
-            rootLayout.Size = new Size(1124, 681);
+            rootLayout.Size = new Size(874, 579);
             rootLayout.TabIndex = 0;
             // 
             // pathsGroup
             // 
-            rootLayout.SetColumnSpan(pathsGroup, 1);
             pathsGroup.Controls.Add(pathsLayout);
             pathsGroup.Dock = DockStyle.Fill;
-            pathsGroup.Location = new Point(15, 15);
+            pathsGroup.Location = new Point(11, 13);
+            pathsGroup.Margin = new Padding(2, 3, 2, 3);
             pathsGroup.Name = "pathsGroup";
-            pathsGroup.Padding = new Padding(10);
-            pathsGroup.Size = new Size(632, 136);
+            pathsGroup.Padding = new Padding(8, 8, 8, 8);
+            pathsGroup.Size = new Size(492, 115);
             pathsGroup.TabIndex = 0;
             pathsGroup.TabStop = false;
             pathsGroup.Text = "文件";
@@ -136,77 +132,48 @@ namespace Injector
             // pathsLayout
             // 
             pathsLayout.ColumnCount = 3;
-            pathsLayout.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 105F));
+            pathsLayout.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 82F));
             pathsLayout.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F));
-            pathsLayout.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 92F));
-            pathsLayout.Controls.Add(injectorLabel, 0, 0);
-            pathsLayout.Controls.Add(injectorPathTextBox, 1, 0);
-            pathsLayout.Controls.Add(browseInjectorButton, 2, 0);
-            pathsLayout.Controls.Add(dllLabel, 0, 1);
-            pathsLayout.Controls.Add(dllPathTextBox, 1, 1);
-            pathsLayout.Controls.Add(browseDllButton, 2, 1);
+            pathsLayout.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 72F));
+            pathsLayout.Controls.Add(dllLabel, 0, 0);
+            pathsLayout.Controls.Add(dllPathTextBox, 1, 0);
+            pathsLayout.Controls.Add(browseDllButton, 2, 0);
             pathsLayout.Dock = DockStyle.Fill;
-            pathsLayout.Location = new Point(10, 26);
+            pathsLayout.Location = new Point(8, 24);
+            pathsLayout.Margin = new Padding(2, 3, 2, 3);
             pathsLayout.Name = "pathsLayout";
-            pathsLayout.RowCount = 2;
-            pathsLayout.RowStyles.Add(new RowStyle(SizeType.Percent, 50F));
-            pathsLayout.RowStyles.Add(new RowStyle(SizeType.Percent, 50F));
-            pathsLayout.Size = new Size(612, 100);
+            pathsLayout.RowCount = 1;
+            pathsLayout.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
+            pathsLayout.Size = new Size(476, 83);
             pathsLayout.TabIndex = 0;
-            // 
-            // injectorLabel
-            // 
-            injectorLabel.Anchor = AnchorStyles.Left;
-            injectorLabel.AutoSize = true;
-            injectorLabel.Location = new Point(3, 15);
-            injectorLabel.Name = "injectorLabel";
-            injectorLabel.Size = new Size(97, 20);
-            injectorLabel.TabIndex = 0;
-            injectorLabel.Text = "Injector DLL";
-            // 
-            // injectorPathTextBox
-            // 
-            injectorPathTextBox.Anchor = AnchorStyles.Left | AnchorStyles.Right;
-            injectorPathTextBox.Location = new Point(108, 11);
-            injectorPathTextBox.Name = "injectorPathTextBox";
-            injectorPathTextBox.Size = new Size(409, 27);
-            injectorPathTextBox.TabIndex = 1;
-            // 
-            // browseInjectorButton
-            // 
-            browseInjectorButton.Anchor = AnchorStyles.Left | AnchorStyles.Right;
-            browseInjectorButton.Location = new Point(523, 10);
-            browseInjectorButton.Name = "browseInjectorButton";
-            browseInjectorButton.Size = new Size(86, 30);
-            browseInjectorButton.TabIndex = 2;
-            browseInjectorButton.Text = "浏览";
-            browseInjectorButton.UseVisualStyleBackColor = true;
-            browseInjectorButton.Click += BrowseInjectorButton_Click;
             // 
             // dllLabel
             // 
             dllLabel.Anchor = AnchorStyles.Left;
             dllLabel.AutoSize = true;
-            dllLabel.Location = new Point(3, 65);
+            dllLabel.Location = new Point(2, 33);
+            dllLabel.Margin = new Padding(2, 0, 2, 0);
             dllLabel.Name = "dllLabel";
-            dllLabel.Size = new Size(74, 20);
+            dllLabel.Size = new Size(57, 17);
             dllLabel.TabIndex = 3;
             dllLabel.Text = "注入 DLL";
             // 
             // dllPathTextBox
             // 
             dllPathTextBox.Anchor = AnchorStyles.Left | AnchorStyles.Right;
-            dllPathTextBox.Location = new Point(108, 61);
+            dllPathTextBox.Location = new Point(84, 30);
+            dllPathTextBox.Margin = new Padding(2, 3, 2, 3);
             dllPathTextBox.Name = "dllPathTextBox";
-            dllPathTextBox.Size = new Size(409, 27);
+            dllPathTextBox.Size = new Size(318, 23);
             dllPathTextBox.TabIndex = 4;
             // 
             // browseDllButton
             // 
             browseDllButton.Anchor = AnchorStyles.Left | AnchorStyles.Right;
-            browseDllButton.Location = new Point(523, 60);
+            browseDllButton.Location = new Point(406, 28);
+            browseDllButton.Margin = new Padding(2, 3, 2, 3);
             browseDllButton.Name = "browseDllButton";
-            browseDllButton.Size = new Size(86, 30);
+            browseDllButton.Size = new Size(68, 26);
             browseDllButton.TabIndex = 5;
             browseDllButton.Text = "浏览";
             browseDllButton.UseVisualStyleBackColor = true;
@@ -216,10 +183,11 @@ namespace Injector
             // 
             targetGroup.Controls.Add(targetLayout);
             targetGroup.Dock = DockStyle.Fill;
-            targetGroup.Location = new Point(15, 157);
+            targetGroup.Location = new Point(11, 134);
+            targetGroup.Margin = new Padding(2, 3, 2, 3);
             targetGroup.Name = "targetGroup";
-            targetGroup.Padding = new Padding(10);
-            targetGroup.Size = new Size(632, 509);
+            targetGroup.Padding = new Padding(8, 8, 8, 8);
+            targetGroup.Size = new Size(492, 432);
             targetGroup.TabIndex = 1;
             targetGroup.TabStop = false;
             targetGroup.Text = "目标进程";
@@ -228,37 +196,40 @@ namespace Injector
             // 
             targetLayout.ColumnCount = 2;
             targetLayout.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F));
-            targetLayout.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 100F));
+            targetLayout.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 78F));
             targetLayout.Controls.Add(processFilterTextBox, 0, 0);
             targetLayout.Controls.Add(refreshProcessesButton, 1, 0);
             targetLayout.Controls.Add(processesListView, 0, 1);
             targetLayout.Controls.Add(selectedProcessLabel, 0, 2);
             targetLayout.Dock = DockStyle.Fill;
-            targetLayout.Location = new Point(10, 26);
+            targetLayout.Location = new Point(8, 24);
+            targetLayout.Margin = new Padding(2, 3, 2, 3);
             targetLayout.Name = "targetLayout";
             targetLayout.RowCount = 3;
-            targetLayout.RowStyles.Add(new RowStyle(SizeType.Absolute, 42F));
+            targetLayout.RowStyles.Add(new RowStyle(SizeType.Absolute, 36F));
             targetLayout.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
-            targetLayout.RowStyles.Add(new RowStyle(SizeType.Absolute, 32F));
-            targetLayout.Size = new Size(612, 473);
+            targetLayout.RowStyles.Add(new RowStyle(SizeType.Absolute, 27F));
+            targetLayout.Size = new Size(476, 400);
             targetLayout.TabIndex = 0;
             // 
             // processFilterTextBox
             // 
             processFilterTextBox.Anchor = AnchorStyles.Left | AnchorStyles.Right;
-            processFilterTextBox.Location = new Point(3, 7);
+            processFilterTextBox.Location = new Point(2, 6);
+            processFilterTextBox.Margin = new Padding(2, 3, 2, 3);
             processFilterTextBox.Name = "processFilterTextBox";
             processFilterTextBox.PlaceholderText = "按进程名或 PID 过滤";
-            processFilterTextBox.Size = new Size(506, 27);
+            processFilterTextBox.Size = new Size(394, 23);
             processFilterTextBox.TabIndex = 0;
             processFilterTextBox.TextChanged += ProcessFilterTextBox_TextChanged;
             // 
             // refreshProcessesButton
             // 
             refreshProcessesButton.Anchor = AnchorStyles.Left | AnchorStyles.Right;
-            refreshProcessesButton.Location = new Point(515, 6);
+            refreshProcessesButton.Location = new Point(400, 5);
+            refreshProcessesButton.Margin = new Padding(2, 3, 2, 3);
             refreshProcessesButton.Name = "refreshProcessesButton";
-            refreshProcessesButton.Size = new Size(94, 30);
+            refreshProcessesButton.Size = new Size(74, 26);
             refreshProcessesButton.TabIndex = 1;
             refreshProcessesButton.Text = "刷新";
             refreshProcessesButton.UseVisualStyleBackColor = true;
@@ -266,15 +237,16 @@ namespace Injector
             // 
             // processesListView
             // 
-            processesListView.Columns.AddRange(new ColumnHeader[] { processNameColumn, pidColumn, processPathColumn });
+            processesListView.Columns.AddRange(new ColumnHeader[] { processNameColumn, pidColumn, processArchitectureColumn, processPathColumn });
             targetLayout.SetColumnSpan(processesListView, 2);
             processesListView.Dock = DockStyle.Fill;
             processesListView.FullRowSelect = true;
             processesListView.GridLines = true;
-            processesListView.Location = new Point(3, 45);
+            processesListView.Location = new Point(2, 39);
+            processesListView.Margin = new Padding(2, 3, 2, 3);
             processesListView.MultiSelect = false;
             processesListView.Name = "processesListView";
-            processesListView.Size = new Size(606, 393);
+            processesListView.Size = new Size(472, 331);
             processesListView.TabIndex = 2;
             processesListView.UseCompatibleStateImageBehavior = false;
             processesListView.View = View.Details;
@@ -291,19 +263,25 @@ namespace Injector
             pidColumn.Text = "PID";
             pidColumn.Width = 80;
             // 
+            // processArchitectureColumn
+            // 
+            processArchitectureColumn.Text = "架构";
+            processArchitectureColumn.Width = 80;
+            // 
             // processPathColumn
             // 
             processPathColumn.Text = "路径";
-            processPathColumn.Width = 320;
+            processPathColumn.Width = 260;
             // 
             // selectedProcessLabel
             // 
             selectedProcessLabel.Anchor = AnchorStyles.Left;
             selectedProcessLabel.AutoSize = true;
             targetLayout.SetColumnSpan(selectedProcessLabel, 2);
-            selectedProcessLabel.Location = new Point(3, 447);
+            selectedProcessLabel.Location = new Point(2, 378);
+            selectedProcessLabel.Margin = new Padding(2, 0, 2, 0);
             selectedProcessLabel.Name = "selectedProcessLabel";
-            selectedProcessLabel.Size = new Size(99, 20);
+            selectedProcessLabel.Size = new Size(68, 17);
             selectedProcessLabel.TabIndex = 3;
             selectedProcessLabel.Text = "未选择进程";
             // 
@@ -311,10 +289,11 @@ namespace Injector
             // 
             optionsGroup.Controls.Add(optionsLayout);
             optionsGroup.Dock = DockStyle.Fill;
-            optionsGroup.Location = new Point(653, 15);
+            optionsGroup.Location = new Point(507, 13);
+            optionsGroup.Margin = new Padding(2, 3, 2, 3);
             optionsGroup.Name = "optionsGroup";
-            optionsGroup.Padding = new Padding(10);
-            optionsGroup.Size = new Size(456, 136);
+            optionsGroup.Padding = new Padding(8, 8, 8, 8);
+            optionsGroup.Size = new Size(356, 115);
             optionsGroup.TabIndex = 2;
             optionsGroup.TabStop = false;
             optionsGroup.Text = "注入选项";
@@ -322,9 +301,9 @@ namespace Injector
             // optionsLayout
             // 
             optionsLayout.ColumnCount = 4;
-            optionsLayout.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 72F));
+            optionsLayout.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 56F));
             optionsLayout.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 50F));
-            optionsLayout.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 72F));
+            optionsLayout.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 67F));
             optionsLayout.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 50F));
             optionsLayout.Controls.Add(modeLabel, 0, 0);
             optionsLayout.Controls.Add(modeComboBox, 1, 0);
@@ -337,91 +316,101 @@ namespace Injector
             optionsLayout.Controls.Add(generateLogCheckBox, 0, 2);
             optionsLayout.Controls.Add(waitSymbolsCheckBox, 2, 2);
             optionsLayout.Dock = DockStyle.Fill;
-            optionsLayout.Location = new Point(10, 26);
+            optionsLayout.Location = new Point(8, 24);
+            optionsLayout.Margin = new Padding(2, 3, 2, 3);
             optionsLayout.Name = "optionsLayout";
             optionsLayout.RowCount = 3;
             optionsLayout.RowStyles.Add(new RowStyle(SizeType.Percent, 33.3333321F));
             optionsLayout.RowStyles.Add(new RowStyle(SizeType.Percent, 33.3333321F));
             optionsLayout.RowStyles.Add(new RowStyle(SizeType.Percent, 33.3333321F));
-            optionsLayout.Size = new Size(436, 100);
+            optionsLayout.Size = new Size(340, 83);
             optionsLayout.TabIndex = 0;
             // 
             // modeLabel
             // 
-            modeLabel.Anchor = AnchorStyles.Left;
-            modeLabel.AutoSize = true;
-            modeLabel.Location = new Point(3, 6);
+            modeLabel.Anchor = AnchorStyles.Left | AnchorStyles.Right;
+            modeLabel.Location = new Point(2, 3);
+            modeLabel.Margin = new Padding(2, 3, 2, 3);
             modeLabel.Name = "modeLabel";
-            modeLabel.Size = new Size(39, 20);
+            modeLabel.Size = new Size(52, 21);
             modeLabel.TabIndex = 0;
             modeLabel.Text = "模式";
+            modeLabel.TextAlign = ContentAlignment.MiddleLeft;
             // 
             // modeComboBox
             // 
             modeComboBox.Anchor = AnchorStyles.Left | AnchorStyles.Right;
             modeComboBox.DropDownStyle = ComboBoxStyle.DropDownList;
             modeComboBox.FormattingEnabled = true;
-            modeComboBox.Location = new Point(75, 3);
+            modeComboBox.Location = new Point(58, 3);
+            modeComboBox.Margin = new Padding(2, 3, 2, 3);
             modeComboBox.Name = "modeComboBox";
-            modeComboBox.Size = new Size(140, 28);
+            modeComboBox.Size = new Size(104, 25);
             modeComboBox.TabIndex = 1;
             // 
             // methodLabel
             // 
-            methodLabel.Anchor = AnchorStyles.Left;
-            methodLabel.AutoSize = true;
-            methodLabel.Location = new Point(221, 6);
+            methodLabel.Anchor = AnchorStyles.Left | AnchorStyles.Right;
+            methodLabel.Location = new Point(166, 3);
+            methodLabel.Margin = new Padding(2, 3, 2, 3);
             methodLabel.Name = "methodLabel";
-            methodLabel.Size = new Size(69, 20);
+            methodLabel.Size = new Size(63, 21);
             methodLabel.TabIndex = 2;
             methodLabel.Text = "启动方式";
+            methodLabel.TextAlign = ContentAlignment.MiddleLeft;
             // 
             // methodComboBox
             // 
             methodComboBox.Anchor = AnchorStyles.Left | AnchorStyles.Right;
             methodComboBox.DropDownStyle = ComboBoxStyle.DropDownList;
             methodComboBox.FormattingEnabled = true;
-            methodComboBox.Location = new Point(293, 3);
+            methodComboBox.Location = new Point(233, 3);
+            methodComboBox.Margin = new Padding(2, 3, 2, 3);
             methodComboBox.Name = "methodComboBox";
-            methodComboBox.Size = new Size(140, 28);
+            methodComboBox.Size = new Size(105, 25);
             methodComboBox.TabIndex = 3;
             // 
             // timeoutLabel
             // 
-            timeoutLabel.Anchor = AnchorStyles.Left;
-            timeoutLabel.AutoSize = true;
-            timeoutLabel.Location = new Point(3, 39);
+            timeoutLabel.Anchor = AnchorStyles.Left | AnchorStyles.Right;
+            timeoutLabel.Location = new Point(2, 30);
+            timeoutLabel.Margin = new Padding(2, 3, 2, 3);
             timeoutLabel.Name = "timeoutLabel";
-            timeoutLabel.Size = new Size(69, 20);
+            timeoutLabel.Size = new Size(52, 21);
             timeoutLabel.TabIndex = 4;
             timeoutLabel.Text = "超时(ms)";
+            timeoutLabel.TextAlign = ContentAlignment.MiddleLeft;
             // 
             // timeoutNumericUpDown
             // 
             timeoutNumericUpDown.Anchor = AnchorStyles.Left | AnchorStyles.Right;
-            timeoutNumericUpDown.Location = new Point(75, 36);
+            timeoutNumericUpDown.Location = new Point(58, 30);
+            timeoutNumericUpDown.Margin = new Padding(2, 3, 2, 3);
             timeoutNumericUpDown.Maximum = new decimal(new int[] { 600000, 0, 0, 0 });
             timeoutNumericUpDown.Name = "timeoutNumericUpDown";
-            timeoutNumericUpDown.Size = new Size(140, 27);
+            timeoutNumericUpDown.Size = new Size(104, 23);
             timeoutNumericUpDown.TabIndex = 5;
+            timeoutNumericUpDown.Value = new decimal(new int[] { 10000, 0, 0, 0 });
             // 
             // handleLabel
             // 
-            handleLabel.Anchor = AnchorStyles.Left;
-            handleLabel.AutoSize = true;
-            handleLabel.Location = new Point(221, 39);
+            handleLabel.Anchor = AnchorStyles.Left | AnchorStyles.Right;
+            handleLabel.Location = new Point(166, 30);
+            handleLabel.Margin = new Padding(2, 3, 2, 3);
             handleLabel.Name = "handleLabel";
-            handleLabel.Size = new Size(49, 20);
+            handleLabel.Size = new Size(63, 21);
             handleLabel.TabIndex = 6;
             handleLabel.Text = "句柄值";
+            handleLabel.TextAlign = ContentAlignment.MiddleLeft;
             // 
             // handleNumericUpDown
             // 
             handleNumericUpDown.Anchor = AnchorStyles.Left | AnchorStyles.Right;
-            handleNumericUpDown.Location = new Point(293, 36);
+            handleNumericUpDown.Location = new Point(233, 30);
+            handleNumericUpDown.Margin = new Padding(2, 3, 2, 3);
             handleNumericUpDown.Maximum = new decimal(new int[] { -1, 0, 0, 0 });
             handleNumericUpDown.Name = "handleNumericUpDown";
-            handleNumericUpDown.Size = new Size(140, 27);
+            handleNumericUpDown.Size = new Size(105, 23);
             handleNumericUpDown.TabIndex = 7;
             // 
             // generateLogCheckBox
@@ -431,9 +420,10 @@ namespace Injector
             generateLogCheckBox.Checked = true;
             generateLogCheckBox.CheckState = CheckState.Checked;
             optionsLayout.SetColumnSpan(generateLogCheckBox, 2);
-            generateLogCheckBox.Location = new Point(3, 71);
+            generateLogCheckBox.Location = new Point(2, 58);
+            generateLogCheckBox.Margin = new Padding(2, 3, 2, 3);
             generateLogCheckBox.Name = "generateLogCheckBox";
-            generateLogCheckBox.Size = new Size(121, 24);
+            generateLogCheckBox.Size = new Size(99, 21);
             generateLogCheckBox.TabIndex = 8;
             generateLogCheckBox.Text = "生成错误日志";
             generateLogCheckBox.UseVisualStyleBackColor = true;
@@ -445,12 +435,26 @@ namespace Injector
             waitSymbolsCheckBox.Checked = true;
             waitSymbolsCheckBox.CheckState = CheckState.Checked;
             optionsLayout.SetColumnSpan(waitSymbolsCheckBox, 2);
-            waitSymbolsCheckBox.Location = new Point(221, 71);
+            waitSymbolsCheckBox.Location = new Point(166, 58);
+            waitSymbolsCheckBox.Margin = new Padding(2, 3, 2, 3);
             waitSymbolsCheckBox.Name = "waitSymbolsCheckBox";
-            waitSymbolsCheckBox.Size = new Size(166, 24);
+            waitSymbolsCheckBox.Size = new Size(135, 21);
             waitSymbolsCheckBox.TabIndex = 9;
             waitSymbolsCheckBox.Text = "注入前等待符号准备";
             waitSymbolsCheckBox.UseVisualStyleBackColor = true;
+            // 
+            // logTextBox
+            // 
+            logTextBox.Dock = DockStyle.Fill;
+            logTextBox.Font = new Font("Consolas", 9F);
+            logTextBox.Location = new Point(507, 134);
+            logTextBox.Margin = new Padding(2, 3, 2, 3);
+            logTextBox.Multiline = true;
+            logTextBox.Name = "logTextBox";
+            logTextBox.ReadOnly = true;
+            logTextBox.ScrollBars = ScrollBars.Vertical;
+            logTextBox.Size = new Size(356, 432);
+            logTextBox.TabIndex = 4;
             // 
             // flagsCheckedListBox
             // 
@@ -497,25 +501,14 @@ namespace Injector
             injectButton.Size = new Size(75, 23);
             injectButton.TabIndex = 0;
             // 
-            // logTextBox
-            // 
-            logTextBox.Dock = DockStyle.Fill;
-            logTextBox.Font = new Font("Consolas", 9F);
-            logTextBox.Location = new Point(653, 157);
-            logTextBox.Multiline = true;
-            logTextBox.Name = "logTextBox";
-            logTextBox.ReadOnly = true;
-            logTextBox.ScrollBars = ScrollBars.Vertical;
-            logTextBox.Size = new Size(456, 509);
-            logTextBox.TabIndex = 4;
-            // 
             // Form1
             // 
-            AutoScaleDimensions = new SizeF(9F, 20F);
+            AutoScaleDimensions = new SizeF(7F, 17F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1124, 681);
+            ClientSize = new Size(874, 579);
             Controls.Add(rootLayout);
-            MinimumSize = new Size(980, 640);
+            Margin = new Padding(2, 3, 2, 3);
+            MinimumSize = new Size(766, 550);
             Name = "Form1";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "GH Injector UI";

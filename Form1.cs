@@ -4,9 +4,9 @@ namespace Injector;
 
 public partial class Form1 : Form
 {
-    private const string DefaultInjectorPath = @"C:\Users\MIT\source\repos\TestInjector\GH Injector - x86.dll";
     private const string DefaultPayloadPath = @"C:\Users\MIT\source\repos\RenderHook\Release\RenderHook.dll";
 
+    private readonly AppSettings _settings = AppSettings.Load();
     private readonly List<ProcessRow> _processes = [];
     private readonly List<FlagItem> _flagItems =
     [
@@ -51,7 +51,7 @@ public partial class Form1 : Form
             ColumnCount = 2,
             RowCount = 5,
             Dock = DockStyle.Fill,
-            Margin = new Padding(3),
+            Margin = new Padding(3)
         };
         rightLayout.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 50F));
         rightLayout.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 50F));
@@ -104,8 +104,9 @@ public partial class Form1 : Form
 
     private void InitializeDefaults()
     {
-        injectorPathTextBox.Text = File.Exists(DefaultInjectorPath) ? DefaultInjectorPath : "";
-        dllPathTextBox.Text = File.Exists(DefaultPayloadPath) ? DefaultPayloadPath : "";
+        Text = $"GH Injector UI - {AppBuild.ArchitectureName}";
+        dllPathTextBox.Text = ResolveInitialDllPath();
+        timeoutNumericUpDown.Value = Math.Clamp(_settings.Timeout, (uint)timeoutNumericUpDown.Minimum, (uint)timeoutNumericUpDown.Maximum);
 
         modeComboBox.DataSource = Enum.GetValues<InjectionMode>();
         methodComboBox.DataSource = Enum.GetValues<LaunchMethod>();
@@ -117,12 +118,9 @@ public partial class Form1 : Form
             flagsCheckedListBox.Items.Add(item);
         }
 
-        AppendLog("就绪。当前程序按 x86 编译，请选择 GH Injector - x86.dll 和 32 位目标进程。");
-    }
-
-    private void BrowseInjectorButton_Click(object? sender, EventArgs e)
-    {
-        BrowseDllInto(injectorPathTextBox, "选择 GH Injector DLL");
+        AppendLog($"当前程序架构：{AppBuild.ArchitectureName}");
+        AppendLog($"将从程序目录加载：{AppBuild.InjectorDllName}");
+        AppendLog($"配置文件：{AppSettings.SettingsPath}");
     }
 
     private void BrowseDllButton_Click(object? sender, EventArgs e)
@@ -130,7 +128,7 @@ public partial class Form1 : Form
         BrowseDllInto(dllPathTextBox, "选择要注入的 DLL");
     }
 
-    private static void BrowseDllInto(TextBox textBox, string title)
+    private void BrowseDllInto(TextBox textBox, string title)
     {
         using var dialog = new OpenFileDialog
         {
@@ -148,6 +146,7 @@ public partial class Form1 : Form
         if (dialog.ShowDialog() == DialogResult.OK)
         {
             textBox.Text = dialog.FileName;
+            SaveCurrentSettings(SelectedProcess);
         }
     }
 
@@ -166,7 +165,12 @@ public partial class Form1 : Form
         var selected = SelectedProcess;
         selectedProcessLabel.Text = selected is null
             ? "未选择进程"
-            : $"已选择：{selected.Name}.exe  PID {selected.Pid}";
+            : $"已选择：{selected.Name}.exe  PID {selected.Pid}  {selected.Architecture}";
+
+        if (selected is not null)
+        {
+            SaveCurrentSettings(selected);
+        }
     }
 
     private void ProcessesListView_DoubleClick(object? sender, EventArgs e)
@@ -210,6 +214,7 @@ public partial class Form1 : Form
                     _processes.Add(new ProcessRow(
                         process.ProcessName,
                         (uint)process.Id,
+                        ProcessArchitecture.GetArchitecture((uint)process.Id),
                         TryGetProcessPath(process)));
                 }
                 catch
@@ -220,6 +225,7 @@ public partial class Form1 : Form
         }
 
         RenderProcesses();
+        SelectRememberedProcess();
         AppendLog($"已刷新进程列表：{_processes.Count} 个。");
     }
 
@@ -231,6 +237,7 @@ public partial class Form1 : Form
             : _processes.Where(p =>
                 p.Name.Contains(filter, StringComparison.OrdinalIgnoreCase) ||
                 p.Pid.ToString().Contains(filter, StringComparison.OrdinalIgnoreCase) ||
+                p.Architecture.Contains(filter, StringComparison.OrdinalIgnoreCase) ||
                 p.Path.Contains(filter, StringComparison.OrdinalIgnoreCase));
 
         processesListView.BeginUpdate();
@@ -243,6 +250,7 @@ public partial class Form1 : Form
                 Tag = row
             };
             item.SubItems.Add(row.Pid.ToString());
+            item.SubItems.Add(row.Architecture);
             item.SubItems.Add(row.Path);
             processesListView.Items.Add(item);
         }
@@ -287,24 +295,57 @@ public partial class Form1 : Form
         await Task.Delay(500);
         injection.StartDownload();
 
-        while (injection.GetDownloadProgress(0, false) < 1.0f)
+        AppendLog("正在下载 ntdll PDB...");
+        while (true)
         {
-            SetProgress(injection.GetDownloadProgress(0, false));
+            var nativeProgress = injection.GetDownloadProgress(0, false);
+            var wow64Progress = Environment.Is64BitProcess
+                ? injection.GetDownloadProgress(0, true)
+                : 1.0f;
+            var combinedProgress = (nativeProgress + wow64Progress) / 2.0f;
+
+            SetProgress(combinedProgress);
+            if (nativeProgress >= 0.999f && wow64Progress >= 0.999f)
+            {
+                break;
+            }
+
             await Task.Delay(30);
         }
 
         SetProgress(1.0f);
-        while (injection.GetSymbolState() != 0)
-        {
-            await Task.Delay(30);
-        }
-
-        while (injection.GetImportState() != 0)
-        {
-            await Task.Delay(30);
-        }
+        await WaitForStateAsync("符号", injection.GetSymbolState);
+        await WaitForStateAsync("导入", injection.GetImportState);
 
         AppendLog("符号和导入信息已准备完成。");
+    }
+
+    private async Task WaitForStateAsync(string name, Func<uint> getState)
+    {
+        var watch = Stopwatch.StartNew();
+        var nextLog = TimeSpan.Zero;
+
+        while (true)
+        {
+            var state = await Task.Run(getState);
+            if (state == 0)
+            {
+                return;
+            }
+
+            if (watch.Elapsed >= nextLog)
+            {
+                AppendLog($"{name}状态仍在准备中，状态码：0x{state:X8}");
+                nextLog = watch.Elapsed + TimeSpan.FromSeconds(3);
+            }
+
+            if (watch.Elapsed > TimeSpan.FromMinutes(3))
+            {
+                throw new TimeoutException($"{name}状态等待超时，最后状态码：0x{state:X8}");
+            }
+
+            await Task.Delay(50);
+        }
     }
 
     private async Task InjectAsync()
@@ -336,16 +377,18 @@ public partial class Form1 : Form
                 await PrepareSymbolsAsync(injection);
             }
 
-            AppendLog($"正在注入 {Path.GetFileName(payloadPath)} -> {target.Name}.exe ({target.Pid})");
+            AppendLog($"正在注入 {Path.GetFileName(payloadPath)} -> {target.Name}.exe ({target.Pid}, {target.Architecture})");
             var result = await Task.Run(() => injection.Inject(request));
             AppendLog($"InjectA 返回：0x{result.ErrorCode:X8}，模块基址：0x{result.DllBase.ToInt64():X}");
 
             if (result.ErrorCode == 0)
             {
+                SaveCurrentSettings(target);
                 MessageBox.Show(this, "注入完成。", "成功", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             else
             {
+                SaveCurrentSettings(target);
                 MessageBox.Show(this, $"InjectA 返回错误码：0x{result.ErrorCode:X8}", "注入失败", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
         }
@@ -362,8 +405,8 @@ public partial class Form1 : Form
 
     private bool ValidateInjectorPath(out string path)
     {
-        path = injectorPathTextBox.Text.Trim();
-        return ValidateExistingFile(path, "请选择 GH Injector DLL。");
+        path = AppBuild.InjectorDllPath;
+        return ValidateExistingFile(path, $"程序目录下没有找到 {AppBuild.InjectorDllName}。");
     }
 
     private bool ValidatePayloadPath(out string path)
@@ -420,7 +463,6 @@ public partial class Form1 : Form
         prepareButton.Enabled = !busy;
         injectButton.Enabled = !busy;
         refreshProcessesButton.Enabled = !busy;
-        browseInjectorButton.Enabled = !busy;
         browseDllButton.Enabled = !busy;
         UseWaitCursor = busy;
     }
@@ -448,7 +490,75 @@ public partial class Form1 : Form
         }
     }
 
-    private sealed record ProcessRow(string Name, uint Pid, string Path);
+    private string ResolveInitialDllPath()
+    {
+        if (File.Exists(_settings.DllPath))
+        {
+            return _settings.DllPath;
+        }
+
+        return File.Exists(DefaultPayloadPath) ? DefaultPayloadPath : "";
+    }
+
+    private void SelectRememberedProcess()
+    {
+        if (SelectedProcess is not null || string.IsNullOrWhiteSpace(_settings.ProcessName))
+        {
+            return;
+        }
+
+        ListViewItem? fallback = null;
+        foreach (ListViewItem item in processesListView.Items)
+        {
+            if (item.Tag is not ProcessRow row ||
+                !row.Name.Equals(_settings.ProcessName, StringComparison.OrdinalIgnoreCase))
+            {
+                continue;
+            }
+
+            fallback ??= item;
+            if (!string.IsNullOrWhiteSpace(_settings.ProcessPath) &&
+                row.Path.Equals(_settings.ProcessPath, StringComparison.OrdinalIgnoreCase))
+            {
+                SelectProcessItem(item);
+                return;
+            }
+        }
+
+        if (fallback is not null)
+        {
+            SelectProcessItem(fallback);
+        }
+    }
+
+    private void SelectProcessItem(ListViewItem item)
+    {
+        item.Selected = true;
+        item.Focused = true;
+        item.EnsureVisible();
+    }
+
+    protected override void OnFormClosing(FormClosingEventArgs e)
+    {
+        SaveCurrentSettings(SelectedProcess);
+        base.OnFormClosing(e);
+    }
+
+    private void SaveCurrentSettings(ProcessRow? target)
+    {
+        _settings.DllPath = dllPathTextBox.Text.Trim();
+        if (target is not null)
+        {
+            _settings.ProcessName = target.Name;
+            _settings.ProcessPath = target.Path;
+        }
+
+        _settings.Timeout = (uint)timeoutNumericUpDown.Value;
+        _settings.Save();
+        AppendLog("已保存本次 DLL 和目标进程选择。");
+    }
+
+    private sealed record ProcessRow(string Name, uint Pid, string Architecture, string Path);
 
     private sealed record FlagItem(string Text, InjectionFlags Value)
     {

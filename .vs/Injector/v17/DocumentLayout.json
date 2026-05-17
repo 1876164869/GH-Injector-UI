@@ -3,8 +3,40 @@
   "WorkspaceRootPath": "C:\\Users\\MIT\\source\\repos\\Injector\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{E3798ABC-0FD0-42E1-9016-C4D633FFAC94}|Injector.csproj|c:\\users\\mit\\source\\repos\\injector\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "AbsoluteMoniker": "D:0:0:{E3798ABC-0FD0-42E1-9016-C4D633FFAC94}|Injector.csproj|C:\\Users\\MIT\\source\\repos\\Injector\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
       "RelativeMoniker": "D:0:0:{E3798ABC-0FD0-42E1-9016-C4D633FFAC94}|Injector.csproj|solutionrelative:form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E3798ABC-0FD0-42E1-9016-C4D633FFAC94}|Injector.csproj|c:\\users\\mit\\source\\repos\\injector\\appsettings.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E3798ABC-0FD0-42E1-9016-C4D633FFAC94}|Injector.csproj|solutionrelative:appsettings.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E3798ABC-0FD0-42E1-9016-C4D633FFAC94}|Injector.csproj|c:\\users\\mit\\source\\repos\\injector\\appbuild.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E3798ABC-0FD0-42E1-9016-C4D633FFAC94}|Injector.csproj|solutionrelative:appbuild.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E3798ABC-0FD0-42E1-9016-C4D633FFAC94}|Injector.csproj|c:\\users\\mit\\source\\repos\\injector\\form1.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E3798ABC-0FD0-42E1-9016-C4D633FFAC94}|Injector.csproj|solutionrelative:form1.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E3798ABC-0FD0-42E1-9016-C4D633FFAC94}|Injector.csproj|c:\\users\\mit\\source\\repos\\injector\\nativeinjection.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E3798ABC-0FD0-42E1-9016-C4D633FFAC94}|Injector.csproj|solutionrelative:nativeinjection.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E3798ABC-0FD0-42E1-9016-C4D633FFAC94}|Injector.csproj|c:\\users\\mit\\source\\repos\\injector\\form1.resx||{81828910-B8B3-4D2B-99A3-067027C180C1}",
+      "RelativeMoniker": "D:0:0:{E3798ABC-0FD0-42E1-9016-C4D633FFAC94}|Injector.csproj|solutionrelative:form1.resx||{81828910-B8B3-4D2B-99A3-067027C180C1}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E3798ABC-0FD0-42E1-9016-C4D633FFAC94}|Injector.csproj|c:\\users\\mit\\source\\repos\\injector\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E3798ABC-0FD0-42E1-9016-C4D633FFAC94}|Injector.csproj|solutionrelative:form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E3798ABC-0FD0-42E1-9016-C4D633FFAC94}|Injector.csproj|c:\\users\\mit\\source\\repos\\injector\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E3798ABC-0FD0-42E1-9016-C4D633FFAC94}|Injector.csproj|solutionrelative:program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E3798ABC-0FD0-42E1-9016-C4D633FFAC94}|Injector.csproj|c:\\users\\mit\\source\\repos\\injector\\processarchitecture.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E3798ABC-0FD0-42E1-9016-C4D633FFAC94}|Injector.csproj|solutionrelative:processarchitecture.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -14,16 +46,117 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 0,
+          "SelectedChildIndex": 8,
           "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "AppSettings.cs",
+              "DocumentMoniker": "C:\\Users\\MIT\\source\\repos\\Injector\\AppSettings.cs",
+              "RelativeDocumentMoniker": "AppSettings.cs",
+              "ToolTip": "C:\\Users\\MIT\\source\\repos\\Injector\\AppSettings.cs",
+              "RelativeToolTip": "AppSettings.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAADwvwAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-17T10:32:19.485Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "Form1.cs",
+              "DocumentMoniker": "C:\\Users\\MIT\\source\\repos\\Injector\\Form1.cs",
+              "RelativeDocumentMoniker": "Form1.cs",
+              "ToolTip": "C:\\Users\\MIT\\source\\repos\\Injector\\Form1.cs*",
+              "RelativeToolTip": "Form1.cs*",
+              "ViewState": "AgIAAB4CAAAAAAAAAAASwC8CAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-17T10:22:14.935Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "Form1.resx",
+              "DocumentMoniker": "C:\\Users\\MIT\\source\\repos\\Injector\\Form1.resx",
+              "RelativeDocumentMoniker": "Form1.resx",
+              "ToolTip": "C:\\Users\\MIT\\source\\repos\\Injector\\Form1.resx*",
+              "RelativeToolTip": "Form1.resx*",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001005|",
+              "WhenOpened": "2026-05-17T09:21:31.271Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\Users\\MIT\\source\\repos\\Injector\\Program.cs",
+              "RelativeDocumentMoniker": "Program.cs",
+              "ToolTip": "C:\\Users\\MIT\\source\\repos\\Injector\\Program.cs",
+              "RelativeToolTip": "Program.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-17T09:21:28.465Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "ProcessArchitecture.cs",
+              "DocumentMoniker": "C:\\Users\\MIT\\source\\repos\\Injector\\ProcessArchitecture.cs",
+              "RelativeDocumentMoniker": "ProcessArchitecture.cs",
+              "ToolTip": "C:\\Users\\MIT\\source\\repos\\Injector\\ProcessArchitecture.cs",
+              "RelativeToolTip": "ProcessArchitecture.cs",
+              "ViewState": "AgIAAAsAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-17T09:21:25.597Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "NativeInjection.cs",
+              "DocumentMoniker": "C:\\Users\\MIT\\source\\repos\\Injector\\NativeInjection.cs",
+              "RelativeDocumentMoniker": "NativeInjection.cs",
+              "ToolTip": "C:\\Users\\MIT\\source\\repos\\Injector\\NativeInjection.cs",
+              "RelativeToolTip": "NativeInjection.cs",
+              "ViewState": "AgIAAMAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-17T09:21:17.362Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "AppBuild.cs",
+              "DocumentMoniker": "C:\\Users\\MIT\\source\\repos\\Injector\\AppBuild.cs",
+              "RelativeDocumentMoniker": "AppBuild.cs",
+              "ToolTip": "C:\\Users\\MIT\\source\\repos\\Injector\\AppBuild.cs",
+              "RelativeToolTip": "AppBuild.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAADwvwAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-17T09:21:08.038Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "Form1.Designer.cs",
+              "DocumentMoniker": "C:\\Users\\MIT\\source\\repos\\Injector\\Form1.Designer.cs",
+              "RelativeDocumentMoniker": "Form1.Designer.cs",
+              "ToolTip": "C:\\Users\\MIT\\source\\repos\\Injector\\Form1.Designer.cs*",
+              "RelativeToolTip": "Form1.Designer.cs*",
+              "ViewState": "AgIAAAAAAAAAAAAAAADwvwAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-17T09:21:05.196Z",
+              "EditorCaption": ""
+            },
             {
               "$type": "Document",
               "DocumentIndex": 0,
               "Title": "Form1.cs [\u8BBE\u8BA1]",
               "DocumentMoniker": "C:\\Users\\MIT\\source\\repos\\Injector\\Form1.cs",
               "RelativeDocumentMoniker": "Form1.cs",
-              "ToolTip": "C:\\Users\\MIT\\source\\repos\\Injector\\Form1.cs [\u8BBE\u8BA1]",
-              "RelativeToolTip": "Form1.cs [\u8BBE\u8BA1]",
+              "ToolTip": "C:\\Users\\MIT\\source\\repos\\Injector\\Form1.cs [\u8BBE\u8BA1]*",
+              "RelativeToolTip": "Form1.cs [\u8BBE\u8BA1]*",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-05-17T08:44:45.252Z",
               "EditorCaption": " [\u8BBE\u8BA1]"

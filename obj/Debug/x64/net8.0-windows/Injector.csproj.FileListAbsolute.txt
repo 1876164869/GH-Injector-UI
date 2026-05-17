@@ -1,0 +1,16 @@
+C:\Users\MIT\source\repos\Injector\bin\Debug\x64\net8.0-windows\Injector-x64.exe
+C:\Users\MIT\source\repos\Injector\bin\Debug\x64\net8.0-windows\Injector-x64.deps.json
+C:\Users\MIT\source\repos\Injector\bin\Debug\x64\net8.0-windows\Injector-x64.runtimeconfig.json
+C:\Users\MIT\source\repos\Injector\bin\Debug\x64\net8.0-windows\Injector-x64.dll
+C:\Users\MIT\source\repos\Injector\bin\Debug\x64\net8.0-windows\Injector-x64.pdb
+C:\Users\MIT\source\repos\Injector\obj\Debug\x64\net8.0-windows\Injector.Form1.resources
+C:\Users\MIT\source\repos\Injector\obj\Debug\x64\net8.0-windows\Injector.csproj.GenerateResource.cache
+C:\Users\MIT\source\repos\Injector\obj\Debug\x64\net8.0-windows\Injector.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\MIT\source\repos\Injector\obj\Debug\x64\net8.0-windows\Injector.AssemblyInfoInputs.cache
+C:\Users\MIT\source\repos\Injector\obj\Debug\x64\net8.0-windows\Injector.AssemblyInfo.cs
+C:\Users\MIT\source\repos\Injector\obj\Debug\x64\net8.0-windows\Injector.csproj.CoreCompileInputs.cache
+C:\Users\MIT\source\repos\Injector\obj\Debug\x64\net8.0-windows\Injector-x64.dll
+C:\Users\MIT\source\repos\Injector\obj\Debug\x64\net8.0-windows\refint\Injector-x64.dll
+C:\Users\MIT\source\repos\Injector\obj\Debug\x64\net8.0-windows\Injector-x64.pdb
+C:\Users\MIT\source\repos\Injector\obj\Debug\x64\net8.0-windows\Injector.genruntimeconfig.cache
+C:\Users\MIT\source\repos\Injector\obj\Debug\x64\net8.0-windows\ref\Injector-x64.dll

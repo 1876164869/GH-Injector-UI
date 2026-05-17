@@ -6,7 +6,20 @@
     <Nullable>enable</Nullable>
     <UseWindowsForms>true</UseWindowsForms>
     <ImplicitUsings>enable</ImplicitUsings>
-    <PlatformTarget>x86</PlatformTarget>
+    <Platforms>x86;x64</Platforms>
+    <PlatformTarget Condition="'$(PlatformTarget)' == ''">x86</PlatformTarget>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(PlatformTarget)' == 'x86'">
+    <AssemblyName>Injector-x86</AssemblyName>
+    <OutputPath>bin\$(Configuration)\x86\</OutputPath>
+    <IntermediateOutputPath>obj\$(Configuration)\x86\</IntermediateOutputPath>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(PlatformTarget)' == 'x64'">
+    <AssemblyName>Injector-x64</AssemblyName>
+    <OutputPath>bin\$(Configuration)\x64\</OutputPath>
+    <IntermediateOutputPath>obj\$(Configuration)\x64\</IntermediateOutputPath>
   </PropertyGroup>
 
 </Project>
