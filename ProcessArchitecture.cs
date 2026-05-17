@@ -32,16 +32,23 @@ internal static class ProcessArchitecture
 
     private static string GetArchitectureFromHandle(nint processHandle)
     {
-        if (!IsWow64Process2(processHandle, out var processMachine, out var nativeMachine))
+        try
         {
-            return new Win32Exception(Marshal.GetLastWin32Error()).NativeErrorCode == 5
-                ? "拒绝访问"
-                : "未知";
-        }
+            if (!IsWow64Process2(processHandle, out var processMachine, out var nativeMachine))
+            {
+                return new Win32Exception(Marshal.GetLastWin32Error()).NativeErrorCode == 5
+                    ? "拒绝访问"
+                    : "未知";
+            }
 
-        return processMachine == ImageFileMachineUnknown
-            ? MachineToText(nativeMachine)
-            : MachineToText(processMachine);
+            return processMachine == ImageFileMachineUnknown
+                ? MachineToText(nativeMachine)
+                : MachineToText(processMachine);
+        }
+        catch (EntryPointNotFoundException)
+        {
+            return "未知";
+        }
     }
 
     private static string MachineToText(ushort machine) => machine switch

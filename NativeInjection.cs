@@ -1,6 +1,5 @@
 using System.ComponentModel;
 using System.Runtime.InteropServices;
-using System.Text;
 
 namespace Injector;
 
@@ -198,15 +197,4 @@ internal enum InjectionFlags : uint
     MmRunUnderLdrLock = 0x01000000,
     MmShiftModuleBase = 0x02000000,
     MmDefault = MmResolveImports | MmResolveDelayImports | MmInitSecurityCookie | MmExecuteTls | MmEnableExceptions | MmRunDllMain | MmSetPageProtections
-}
-
-internal sealed class RawLogWriter : TextWriter
-{
-    private readonly Action<string> _write;
-
-    public RawLogWriter(Action<string> write) => _write = write;
-
-    public override Encoding Encoding => Encoding.UTF8;
-
-    public override void WriteLine(string? value) => _write(value ?? string.Empty);
 }

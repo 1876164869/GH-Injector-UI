@@ -4,8 +4,6 @@ namespace Injector;
 
 public partial class Form1 : Form
 {
-    private const string DefaultPayloadPath = @"C:\Users\MIT\source\repos\RenderHook\Release\RenderHook.dll";
-
     private readonly AppSettings _settings = AppSettings.Load();
     private readonly List<ProcessRow> _processes = [];
     private readonly List<FlagItem> _flagItems =
@@ -383,12 +381,12 @@ public partial class Form1 : Form
 
             if (result.ErrorCode == 0)
             {
-                SaveCurrentSettings(target);
+                SaveCurrentSettings(target, writeLog: true);
                 MessageBox.Show(this, "注入完成。", "成功", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             else
             {
-                SaveCurrentSettings(target);
+                SaveCurrentSettings(target, writeLog: true);
                 MessageBox.Show(this, $"InjectA 返回错误码：0x{result.ErrorCode:X8}", "注入失败", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
         }
@@ -497,7 +495,7 @@ public partial class Form1 : Form
             return _settings.DllPath;
         }
 
-        return File.Exists(DefaultPayloadPath) ? DefaultPayloadPath : "";
+        return "";
     }
 
     private void SelectRememberedProcess()
@@ -544,7 +542,7 @@ public partial class Form1 : Form
         base.OnFormClosing(e);
     }
 
-    private void SaveCurrentSettings(ProcessRow? target)
+    private void SaveCurrentSettings(ProcessRow? target, bool writeLog = false)
     {
         _settings.DllPath = dllPathTextBox.Text.Trim();
         if (target is not null)
@@ -555,7 +553,11 @@ public partial class Form1 : Form
 
         _settings.Timeout = (uint)timeoutNumericUpDown.Value;
         _settings.Save();
-        AppendLog("已保存本次 DLL 和目标进程选择。");
+
+        if (writeLog)
+        {
+            AppendLog("已保存本次 DLL 和目标进程选择。");
+        }
     }
 
     private sealed record ProcessRow(string Name, uint Pid, string Architecture, string Path);
